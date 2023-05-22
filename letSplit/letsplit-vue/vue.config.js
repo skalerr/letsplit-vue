@@ -4,7 +4,20 @@ module.exports = {
     //   filename: 'main.js'
     // }
   },
-  transpileDependencies: true,
-  lintOnSave: 'warning', // линтер по умолчанию true, ворнинг превращает все ошибки в предупреждения из-за чего не падает сборщик отключать по желанию
+
+  transpileDependencies: [
+    'quasar'
+  ],
+
+  // линтер по умолчанию true, ворнинг превращает все ошибки в предупреждения из-за чего не падает сборщик отключать по желанию
+  lintOnSave: 'warning',
+
   filenameHashing: false,
+
+  pluginOptions: {
+    quasar: {
+      importStrategy: 'kebab',
+      rtlSupport: false
+    }
+  }
 }
