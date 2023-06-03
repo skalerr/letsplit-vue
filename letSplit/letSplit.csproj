@@ -23,10 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Vue\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <_ContentIncludedByDefault Remove="letsplit-vue-tets\jsconfig.json" />
       <_ContentIncludedByDefault Remove="letsplit-vue-tets\package-lock.json" />
       <_ContentIncludedByDefault Remove="letsplit-vue-tets\package.json" />

@@ -2,7 +2,8 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
-    <router-link to="/quasar">Quasar</router-link>
+    <router-link to="/quasar">Quasar</router-link> |
+    <router-link to="/money">Money</router-link>
     
   </nav>
   <router-view/>

@@ -83,7 +83,7 @@
 
 <script>
 import { ref } from 'vue'
-import QuasarWorld from "@/components/QuasarWorld.vue";
+import QuasarWorld from "@/components/BaseComponents/QuasarWorld.vue";
 
 export default {
   name: 'LayoutDefault',
