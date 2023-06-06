@@ -1,6 +1,6 @@
 <template>
   <q-page-container>
-    <q-page>
+    <q-page padding>
       <q-badge color="secondary" multi-line> Model: "{{ model }}"</q-badge>
 
       <q-select
@@ -53,7 +53,7 @@
       </q-input>
 
       <!-- дата пикер -->
-      <div class="q-pa-md">
+      <div class="q-pa-md row justify-center">
         <div class="q-gutter-md row items-start">
           <q-date v-model="date" />
         </div>
@@ -62,7 +62,8 @@
       <div class="q-pa-md q-gutter-md text-center">
         <div class="q-gutter-md row justify-center">
           <q-btn label="Добавить" color="primary" @click="createEvent" />
-          <q-btn label="Отмена" color="grey-8" @click="createEvent" />
+          
+          <q-btn label="Отмена" color="grey-8" @click="$router.go(-1)"></q-btn>
         </div>
       </div>
     </q-page>
@@ -76,6 +77,8 @@ export default {
     refreshUsers: {},
     model: {},
     options: {},
+
+    
   },
 
   data() {
@@ -83,6 +86,8 @@ export default {
       date: "",
       typepay: "",
       test: null,
+      shape: "",
+      number: ""
     };
   },
 };

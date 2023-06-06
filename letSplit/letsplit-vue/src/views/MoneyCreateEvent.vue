@@ -4,10 +4,14 @@
       <q-card-section class="text-h6">Создать ивент</q-card-section>
       <q-card-section>
         <q-card-section class="bg-grey-2">
-          <q-input v-model="eventName" label="Название ивента" outlined />
+          <q-input
+            v-model="myevent.eventName"
+            label="Название ивента"
+            outlined
+          />
           <q-select
-            v-model="currency"
-            :options="currencies"
+            v-model="myevent.currency"
+            :options="myevent.currencies"
             label="Валюта"
             outlined
           />
@@ -15,7 +19,7 @@
 
         <q-card-section class="text-h6">Участники</q-card-section>
         <div
-          v-for="(participant, index) in participants"
+          v-for="(participant, index) in myevent.participants"
           :key="index"
           class="q-my-md"
         >
@@ -49,64 +53,40 @@
   </q-page>
 </template>
 <script>
+import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
+
 export default {
   data() {
-    return {
-      eventName: "",
-      currency: "",
-      currencies: [
-        "RUB",
-        "USD",
-        "EUR",
-        "JPY",
-        "GBP",
-        "AUD",
-        "CAD",
-        "CHF",
-        "CNY",
-        "HKD",
-        "NZD",
-      ],
+    return {};
+  },
+  mounted() {
+    console.log(this.myevent);
+    // this.myevent = this.myevent.participants;
+  },
 
-      participants: [
-        {
-          name: "",
-          email: "",
-          label: "",
-          value: "",
-        },
-        {
-          name: "",
-          email: "",
-          label: "",
-          value: "",
-        },
-      ],
-      options: [
-        // {
-        //   label: "Google",
-        //   value: "Google",
-        //   description: "Search engine",
-        //   icon: "mail",
-        // },
-      ],
-    };
+  computed: {
+    ...mapGetters({
+      myevent: "getEvent",
+    }),
+
+    ...mapState({}),
   },
 
   methods: {
+    ...mapActions(["setEventName", "setCurrency"]),
+    ...mapMutations(["ADD_PARTICIPIANT", "SET_EVENT"]),
     addParticipant() {
-      this.participants.push({
+      const participant = {
         name: "",
         email: "",
-      });
+        label: "",
+        value: "",
+      };
+      this.ADD_PARTICIPIANT(participant);
     },
     createEvent() {
-      // Send event data to server using axios or any other HTTP client library
-      console.log({
-        eventName: this.eventName,
-        currency: this.currency,
-        participants: this.participants,
-      });
+      this.SET_EVENT(this.myevent);
+      console.log(this.myevent);
     },
   },
 };

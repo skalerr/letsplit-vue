@@ -1,12 +1,6 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/quasar">Quasar</router-link> |
-    <router-link to="/money">Money</router-link>
-    
-  </nav>
-  <router-view/>
+  <router-view>
+  </router-view>
 </template>
 
 <style>
@@ -31,3 +25,10 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+<script>
+import MoneyView from "@/views/MoneyView.vue";
+
+export default ({
+    components: {MoneyView}
+})
+</script>
