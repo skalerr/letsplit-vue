@@ -13,6 +13,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.5" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.5" />
         <PackageReference Include="Microsoft.Identity.Web" Version="1.16.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -29,6 +30,10 @@
       <_ContentIncludedByDefault Remove="letsplit-vue-tets\jsconfig.json" />
       <_ContentIncludedByDefault Remove="letsplit-vue-tets\package-lock.json" />
       <_ContentIncludedByDefault Remove="letsplit-vue-tets\package.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace letSplit.Models;
 
@@ -8,14 +10,18 @@ public class MyEvent
     {
         
     }
-    public string EventName = "String.Empty";
+    [Key]
+    public long Id { get; set; }
     
+    [JsonPropertyName("eventName")]
+    public string EventName { get; set; } = string.Empty;
+
     [JsonPropertyName("eventCurrency")]
-    public Currency EventCurrency = Currency.RUB;
-    
-    [JsonPropertyName("participants")]
-    public IEnumerable<User> Participants;
+    public Currency EventCurrency { get; set; } = Currency.RUB;
+
+    [JsonPropertyName("users")]
+    public ICollection<User> Users { get; set; }
     
     [JsonPropertyName("spends")]
-    public IEnumerable<Spend>? Spends;
+    public ICollection<Spend>? Spends { get; set; }
 }

@@ -1,6 +1,8 @@
+using letSplit.AppDbContext;
 using letSplit.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web.Resource;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -11,71 +13,39 @@ namespace letSplit.Controllers;
 [Route("[controller]/[action]")]
 public class MoneyController : ControllerBase
 {
-    public static ICollection<MyEvent> _events;
-    public MoneyController()
+    private readonly AplDbContext _db;
+    public MoneyController(AplDbContext db)
     {
-        _events = new List<MyEvent>();
-        var newEvent = new MyEvent ()
-        {
-            EventName = "Let's Split",
-            // Participants = new List<Participant>()
-            // {
-            //     new Participant() {Name = "John", Email = "j@j.com"},
-            // },
-            // EventCurrency = Currency.RUB,
-        };
-        // _events = new List<MyEvent>()
-        // {
-        //     new MyEvent()
-        //     {
-        //         EventName = "Let's Split",
-        //         // Participants = new List<Participant>()
-        //         // {
-        //         //     new Participant() { Name = "John", Email = "j@j.com" }
-        //         // },
-        //         // EventCurrency = Currency.RUB,
-        //     },
-        //     new MyEvent()
-        //     {
-        //         EventName = "Another Event",
-        //         // Participants = new List<Participant>()
-        //         // {
-        //         //     new Participant() { Name = "Alice", Email = "a@a.com" }
-        //         // },
-        //         // EventCurrency = Currency.USD,
-        //     }
-        // };
-        _events.Add(newEvent);
+        _db = db;
     }
     
     [HttpPost]
     public MyEvent CreateEvent(MyEvent myEventModel)
     {
-        _events.Add(myEventModel);
+        _db.MyEvents.Add(myEventModel);
         return myEventModel;
     }
     [HttpGet]
     public MyEvent GetEvent(string eventName)
     {
-        return _events.FirstOrDefault(e => e.EventName == eventName) ?? throw new InvalidOperationException();
+        return _db.MyEvents.FirstOrDefault(e => e.EventName == eventName) ?? throw new InvalidOperationException();
     }
     
     [HttpGet]
-    public MyEvent GetEvents()
+    public List<MyEvent> GetEvents()
     {
-        return _events.FirstOrDefault();
-
+        return _db.MyEvents.Include(e => e.Users).Include(u => u.Spends).ToList();
     }
 
-    // [HttpGet]
-    // public IList<Participant> GetParticipants(string eventName)
-    // {
-    //     if (string.IsNullOrWhiteSpace(eventName))
-    //     {
-    //         return new List<Participant>();
-    //     }
-    //     
-    //     var users = _events.FirstOrDefault(e => e.EventName == eventName).Participants.ToList();
-    //     return users;
-    // }
+    [HttpGet]
+    public IList<User> GetParticipants(string eventName)
+    {
+        if (string.IsNullOrWhiteSpace(eventName))
+        {
+            return new List<User>();
+        }
+        
+        var users = _db.MyEvents.FirstOrDefault(e => e.EventName == eventName).Users.ToList();
+        return users;
+    }
 }
