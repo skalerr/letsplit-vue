@@ -18,7 +18,16 @@ builder.Services.AddSwaggerGen(c =>
     
 });
 builder.Services.AddDbContext<AplDbContext>();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllHeaders",
+        corsPolicyBuilder =>
+        {
+            corsPolicyBuilder.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin();
+        });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,6 +41,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseCors("AllowAllHeaders");
 // app.UseHttpsRedirection();
 //
 // app.UseAuthentication();

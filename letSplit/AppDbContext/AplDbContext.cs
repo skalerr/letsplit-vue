@@ -18,10 +18,10 @@ public class AplDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>()
-            .HasOne(u => u.MyEvent)
-            .WithMany(e => e.Users)
-            .HasForeignKey(u => u.MyEventId);
+        // modelBuilder.Entity<User>()
+        //     .HasOne(u => u.MyEvent)
+        //     .WithMany(e => e.Users)
+        //     .HasForeignKey(u => u.MyEventId);
         
         modelBuilder.Entity<MyEvent>().HasData(
             new MyEvent()

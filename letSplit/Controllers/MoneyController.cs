@@ -1,6 +1,7 @@
 using letSplit.AppDbContext;
 using letSplit.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web.Resource;
@@ -9,6 +10,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace letSplit.Controllers;
 
+[EnableCors("AllowAllHeaders")]
 [ApiController]
 [Route("[controller]/[action]")]
 public class MoneyController : ControllerBase
