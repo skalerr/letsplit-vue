@@ -26,9 +26,7 @@ nav a.router-link-exact-active {
 }
 </style>
 <script>
-import MoneyView from "@/views/MoneyView.vue";
 
 export default ({
-    components: {MoneyView}
 })
 </script>

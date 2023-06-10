@@ -31,8 +31,7 @@
     </q-page-container>
 
     <q-page-container>
-      <MoneyEventView v-if=""> 
-      </MoneyEventView>
+      <MoneyEventView> </MoneyEventView>
     </q-page-container>
 
     <q-footer elevated class="bg-grey-8 text-white">
@@ -52,31 +51,30 @@
 import CreateEvent from "@/views/MoneyCreateEvent.vue";
 import AddSplits from "@/views/AddSplits.vue";
 import MoneyEventView from "@/views/MoneyEventView.vue";
-import { mapGetters, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
   components: { MoneyEventView, AddSplits, CreateEvent },
-  props: {
-
-  },
+  props: {},
   data() {
     return {
+      myevent: {},
       leftDrawerOpen: false,
     };
   },
   computed: {
     ...mapGetters({
-      myevent: "getEvent",
+      getEvent: "getEvent",
     }),
-
+    ...mapActions({ getAllEvents: "getAllEvents" }),
     ...mapState({}),
   },
+  async mounted() {
+    console.log(await this.getAllEvents)
+    console.log(this.getEvent)
+  },
+
   methods: {
-    eventPage(){
-      let event = this.getEvent
-      event.
-    },
-    
     refreshUsers() {
       this.participants.forEach((partis) => {
         this.options.push({

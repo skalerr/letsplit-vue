@@ -61,7 +61,7 @@ export default {
   },
   mounted() {
     console.log(this.myevent);
-    // this.myevent = this.myevent.participants;
+    // this.myEvents = this.myEvents.participants;
   },
 
   computed: {

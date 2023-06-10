@@ -1,52 +1,53 @@
 import { createStore } from "vuex";
 import axios from "axios";
-
+import settings from "@/settings.js";
 export default createStore({
   state: {
-    myEvent: [],
+    myEvents: [
+    ],
   },
   getters: {
     getEvent(state) {
-      return state.myevent;
+      return state.myEvents[0];
     },
   },
   mutations: {
-    ADD_PARTICIPIANT(state, payload) {
-      state.myevent.participants.push({
-        name: payload.name,
-        email: payload.email,
-        label: payload.name,
-        value: payload.name,
-      });
-    },
+    // ADD_PARTICIPIANT(state, payload) {
+    //   state.myEvents.participants.push({
+    //     name: payload.name,
+    //     email: payload.email,
+    //     label: payload.name,
+    //     value: payload.name,
+    //   });
+    // },
     SET_EVENT(state, event) {
-      state.myevent = event;
+      state.myEvents = event;
     },
-    SET_CURRENCY(state, currency) {
-      state.currency = currency;
-    },
+    // SET_CURRENCY(state, currency) {
+    //   state.currency = currency;
+    // },
   },
-
   actions: {
-    
-    async getEvents({ commit }) {
-      let event = await axios.get("http://localhost:3000/events").then((response) => {
-        console.log(response.data);
-      }).catch((error) => {
-        console.error(error);
-      });
-      commit("SET_EVENT", event);
-      
+    async getAllEvents({commit}) {
+      let resp;
+      await axios
+        .get(`${settings.apiUrl}/Money/GetEvents`)
+        .then((response) => {
+          commit("SET_EVENT", response.data);
+          resp = response.data;
+        })
+        .catch((error) => {
+          resp = error;
+        });
+      return resp;
     },
-
-    setEventName({ commit }, eventName) {
-      commit("SET_EVENT_NAME", eventName);
-    },
-    setCurrency({ commit }, currency) {
-      commit("SET_CURRENCY", currency);
-    },
+    // setEventName({ commit }, eventName) {
+    //   commit("SET_EVENT_NAME", eventName);
+    // },
+    // setCurrency({ commit }, currency) {
+    //   commit("SET_CURRENCY", currency);
+    // },
     // Добавьте другие действия, если необходимо
   },
-
   modules: {},
 });
